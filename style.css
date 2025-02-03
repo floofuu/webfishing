@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4e1c1;
+    text-align: center;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.nav-buttons {
+    display: flex;
+    position: absolute;
+    top: 0%;
+    gap: 10px;
+    right: 10px;
+}
+
+.nav-buttons button {
+    background-color: #8abf92;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.character-preview {
+    display: flex;
+    align-items: flex-end;
+    width: 300px;
+    height: 375px;
+    background-color: #f5d7b0;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    z-index: 5;
+
+    position: absolute; 
+    bottom: 10px; 
+    left: 10px; 
+}
+
+.game-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    height: 98vh;
+    width: 1683px;
+    margin: 0 auto;
+}
+
+.background {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    height: 600px;
+    width: 1283px;
+    margin: 0 auto;
+    
+}
+
+.background-img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-image: url("img/webfishing_assets-background-updated3.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.background-img2 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-image: url("img/webfishing_assets-pond1.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.gif{
+    background-image: url("img/webfishing_ivy-gif.gif");
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+
+.everything {
+    display: flex;
+    flex-direction: column;   
+}
