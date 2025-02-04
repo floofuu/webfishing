@@ -5,27 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ivy's small world</title>
     <link href="style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Play:wght@400;700&display=swap" rel="stylesheet">
+
+<script>
+
+
+    function swapBackgroundImage() {
+        const container = document.getElementById('animation');
+        const image1 = 'url("img/webfishing_assets-pond1.png")'; // First image
+        const image2 = 'url("img/webfishing_assets-pond2.png")'; // Second image
+        const image3 = 'url("img/webfishing_assets-pond3.png")'; // Second image
+        const image4 = 'url("img/webfishing_assets-pond4.png")'; // Second image
+        const image5 = 'url("img/webfishing_assets-pond5.png")'; // Second image
+        // Check the current background image and swap it after a delay
+        container.onclick = null;
+            setTimeout(function() {
+                container.style.backgroundImage = image2;
+                console.log("image2");
+            }, 500); // 2000 milliseconds (2 seconds) delay
+
+            setTimeout(function() {
+                container.style.backgroundImage = image3;
+                console.log("image3");
+            }, 900); // 2000 milliseconds (2 seconds) delay
+            setTimeout(function() {
+                container.style.backgroundImage = image4;
+                console.log("image4");
+            }, 1300); // 2000 milliseconds (2 seconds) delay
+            setTimeout(function() {
+                container.style.backgroundImage = image5;
+                console.log("image5");
+            }, 2700); // 2000 milliseconds (2 seconds) delay
+
+            setTimeout(function() {
+                container.style.backgroundImage = image1;
+                container.onclick = swapBackgroundImage;
+                console.log("image1");
+            }, 3500); // 2000 milliseconds (2 seconds) delay
+    } 
+    
+    function startScreen() {
+            const startingScreen = document.querySelector('.start');
+            const container2 = document.querySelector('.start-img');
+            startingScreen.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+            container2.style.display = 'none';
+            startingScreen.style.pointerEvents = 'none';
+            container2.style.pointerEvents = 'none';
+            startingScreen.onclick = null;
+        }
+
+</script>
+
 </head>
 <body>
-    <div class="everything">
-        <div class="game-container">
-            <div class="header">
-                <div class="nav-buttons">
-                    <button>Bait and Sell</button>
-                    <button>Catalogue</button>
-                    <button>Accessories</button>
+    
+        <div class="everything">
+            <div class="start" onclick="startScreen()">
+                <div class="start-img"></div>
+            </div>
+            <div class="game-container">
+                <div class="header">
+                    <div class="nav-buttons">
+                        <button>bait and sell</button>
+                        <button>catalogue</button>
+                        <button>accessories</button>
+                    </div>
+                </div>
+                <div class="background">
+                    <div class="background-img"></div>
+                    <div class="background-img2" id="animation" onclick="swapBackgroundImage()"></div>
+                </div>
+                <div class="character-preview">
+                    <div class="gif"></div>
                 </div>
             </div>
-            <div class="background">
-                <div class="background-img"></div>
-                <div class="background-img2"></div>
-            </div>
-            <div class="character-preview">
-                <div class="gif"></div>
-            </div>
+            
+            
         </div>
-        
-        
-    </div>
+    
 </body>
 </html>
