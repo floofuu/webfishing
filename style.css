@@ -9,15 +9,18 @@ body {
     position: fixed; 
     display: flex;
     justify-content: center;
-
     align-items: center;
     width: 100vw;
     height: 100vh;
     margin: 0;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 10;
+    cursor: pointer;
+    pointer-events: auto;
+}
 
-
+.start[style*="background-color rgba(0, 0, 0, 0)"] {
+    pointer-events: none;
 }
 
 .start-img {
@@ -53,7 +56,7 @@ body {
     top: 10px;
     gap: 16px;
     right: 10px;
-    width: 580px;
+    width: 350px;
     height: 58px;
 }
 
@@ -62,7 +65,7 @@ body {
     border: none;
     padding: 10px;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 15px;
     width: 190px;
     color: white;
     font-family: "DM Mono" , serif;
@@ -119,6 +122,7 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     filter: drop-shadow(0px 10px 4px rgba(0, 0, 0, 0.25));
+    cursor: pointer;
 }
 .background-img2 {
     position: absolute;
@@ -130,6 +134,8 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     transition: background-image 0.3s ease;
+    cursor: pointer;
+    pointer-events: auto;
 }
 
 .gif{
@@ -141,3 +147,289 @@ body {
     border-radius: 10px;
 }
 
+.opentab1 {
+    position: absolute; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    pointer-events: none;
+    z-index: 11;
+}
+
+.about {
+    opacity: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45vw;
+    height: 85vh;
+    background-color: #d5aa73;
+    border: #ffeed5 solid 10px;
+    border-radius: 20px;
+    z-index: 11;
+    pointer-events: none;
+}
+
+.about[style*="opacity: 1"] {
+    pointer-events: auto; 
+}
+
+.inner-about {
+    color: #ffeed5;
+    font: "DM Mono";
+    font-size: 12px;
+}
+
+h1 {
+    font-weight: 400;
+}
+
+h2 {
+    font-weight: 400;
+}
+
+h3 {
+    font-weight: 400;
+}
+
+h4 {
+    font-weight: 150;
+}
+h5 {
+    font-weight: 150;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: #ffeed5; 
+    cursor: pointer;
+    z-index: 12; 
+    pointer-events: auto;
+}
+
+.close-button:hover {
+    color: #ffffff; 
+}
+
+.opentab2 {
+    position: absolute; 
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    right: 40px;
+
+    pointer-events: none;
+    z-index: 11;
+}
+
+.inventory {
+    opacity: 0;
+    position: relative; 
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 45vw;
+    height: 85vh;
+    margin: 0;
+    pointer-events: none;
+    z-index: 11;
+    overflow: hidden;
+    
+    background-color: #d5aa73;
+    border: #ffeed5 10px solid;
+    border-radius: 10px;
+    
+}
+
+.inventory[style*="opacity: 1"] {
+    pointer-events: auto;
+}
+
+.inner-inventory{
+    position: relative;
+    display: grid;
+    width: 50vw;
+    height: 100%;
+
+    z-index: 11;
+    padding: 10px;
+    box-sizing: border-box;
+    
+
+}
+
+.items-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Space between categories */
+    left: 10px;
+
+}
+
+.category-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Space between title and items */
+}
+
+.item-row {
+    display: flex;
+    gap: 20px; /* Space between items */
+    flex-wrap: wrap; /* Wrap items to the next line if needed */
+}
+
+.inventory-item {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.inventory-item:hover {
+    transform: scale(1.1);
+}
+
+.inventory-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+.inventory-text{
+    text-align: left;
+    margin: 5px;
+    color: #ffeed5;
+}
+
+
+.hover-details {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.hover-details.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.hover-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.counter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    
+    
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: "DM Mono", serif;
+    font-size: 16px;
+    z-index: 6;
+}
+
+#score {
+    color: black;
+    bottom: 5px;
+}
+
+#score-symbol {
+    margin-right: 3px; 
+    font-size: 18px; 
+    color: black;
+    bottom: 5px ;
+}
+
+#salmon{
+    height: 5vh;
+    width: 5vw;
+
+}
+
+@keyframes pondAnimation {
+    0% { background-image: url("img/webfishing_assets-pond1.png"); }
+    20% { background-image: url("img/webfishing_assets-pond2.png"); }
+    40% { background-image: url("img/webfishing_assets-pond3.png"); }
+    60% { background-image: url("img/webfishing_assets-pond4.png"); }
+    80% { background-image: url("img/webfishing_assets-pond5.png"); }
+    100% { background-image: url("img/webfishing_assets-pond1.png"); }
+}
+
+#animation.animate {
+    animation: pondAnimation 3s ease-in-out forwards;
+}
+
+.hover-img{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 5    0vw; 
+    height: 100vh;
+    gap: 20px;
+
+}
+
+.clothes-img {
+    width: 15vw;
+    height: 40vh;   
+    background-color: #d5aa73;
+    border: #ffeed5 solid 10px;
+    border-radius: 20px;
+    z-index: 11;
+    pointer-events: none;
+
+}
+
+.hover-text {
+    position: relative;
+    width: 20vw;
+    height: 12.5vh;
+    background-color: #ffeed5;
+    border-radius: 20px;
+    z-index: 11;
+    pointer-events: none;
+    padding: 10px;
+
+}
+
+.description1 {
+    margin: 5px;
+    text-align: left;
+}
+
+.hover-img {
+    display: none;
+}
+
+#clothes1Img + .hover-img :hover{
+    display: block;
+}

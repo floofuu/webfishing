@@ -11,40 +11,39 @@
 
 <script>
 
+var money = {
+    "total" : {
+        "amount" : 0
+    }
+}
 
-    function swapBackgroundImage() {
-        const container = document.getElementById('animation');
-        const image1 = 'url("img/webfishing_assets-pond1.png")'; // First image
-        const image2 = 'url("img/webfishing_assets-pond2.png")'; // Second image
-        const image3 = 'url("img/webfishing_assets-pond3.png")'; // Second image
-        const image4 = 'url("img/webfishing_assets-pond4.png")'; // Second image
-        const image5 = 'url("img/webfishing_assets-pond5.png")'; // Second image
-        // Check the current background image and swap it after a delay
-        container.onclick = null;
-            setTimeout(function() {
-                container.style.backgroundImage = image2;
-                console.log("image2");
-            }, 500); // 2000 milliseconds (2 seconds) delay
 
-            setTimeout(function() {
-                container.style.backgroundImage = image3;
-                console.log("image3");
-            }, 900); // 2000 milliseconds (2 seconds) delay
-            setTimeout(function() {
-                container.style.backgroundImage = image4;
-                console.log("image4");
-            }, 1300); // 2000 milliseconds (2 seconds) delay
-            setTimeout(function() {
-                container.style.backgroundImage = image5;
-                console.log("image5");
-            }, 2700); // 2000 milliseconds (2 seconds) delay
 
-            setTimeout(function() {
-                container.style.backgroundImage = image1;
-                container.onclick = swapBackgroundImage;
-                console.log("image1");
-            }, 3500); // 2000 milliseconds (2 seconds) delay
-    } 
+
+
+function updateScore() {
+    money.total.amount += Math.floor(Math.random(50, 100)*51 + 50);
+    const moneyDisplay = document.getElementById('score');
+    moneyDisplay.textContent = `${money.total.amount}`;
+    console.log(money.total.amount);
+}
+    
+function swapBackgroundImage() {
+    console.log("Main image clicked!");
+    const container = document.getElementById('animation');
+    container.onclick = null;
+
+  
+    container.classList.add('animate');
+
+    
+    setTimeout(() => {
+        container.classList.remove('animate');
+        updateScore();
+        container.onclick = swapBackgroundImage;
+    }, 4000);
+}
+
     
     function startScreen() {
             const startingScreen = document.querySelector('.start');
@@ -54,7 +53,339 @@
             startingScreen.style.pointerEvents = 'none';
             container2.style.pointerEvents = 'none';
             startingScreen.onclick = null;
+            const aboutTab = document.querySelector('.about');
+            aboutTab.style.visibility="hidden";
         }
+
+        function toggleAboutTab() {
+    const aboutTab = document.querySelector('.about');
+    const startingScreen = document.querySelector('.start');
+
+   
+    if (aboutTab.style.opacity === "1") {
+   
+        aboutTab.style.opacity = "0";
+        startingScreen.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    } else {
+       
+        aboutTab.style.opacity = "1";
+        startingScreen.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    }
+}
+
+
+    function startScreen() {
+        const startingScreen = document.querySelector('.start');
+        const container2 = document.querySelector('.start-img');
+        const aboutTab = document.querySelector('.about');
+        const inventoryTab = document.querySelector('.inventory');
+
+        // Hide the starting screen elements
+        startingScreen.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+        container2.style.display = 'none';
+        startingScreen.style.pointerEvents = 'none';
+        container2.style.pointerEvents = 'none';
+        startingScreen.onclick = null;
+
+        // Ensure the About and Inventory tabs are hidden initially
+        aboutTab.style.opacity = "0";
+        aboutTab.style.transform = "scale(0.9)";
+        inventoryTab.style.opacity = "0";
+        inventoryTab.style.transform = "scale(0.9)";
+}
+function toggleInventoryTab() {
+    const inventoryTab = document.querySelector('.inventory');
+    const startingScreen = document.querySelector('.start');
+
+    // Toggle the visibility of the inventory tab
+    if (inventoryTab.style.opacity === "1") {
+        // Close the tab
+        inventoryTab.style.opacity = "0";
+        inventoryTab.style.transform = "scale(0.9)";
+        startingScreen.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    } else {
+        // Open the tab
+        inventoryTab.style.opacity = "1";
+        inventoryTab.style.transform = "scale(1)";
+        startingScreen.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    }
+}
+
+function closeInventoryTab() {
+    const inventoryTab = document.querySelector('.inventory');
+    const startingScreen = document.querySelector('.start');
+
+    // Hide the inventory tab
+    inventoryTab.style.opacity = "0";
+    inventoryTab.style.transform = "scale(0.9)";
+    startingScreen.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+}
+
+function closeAboutTab() {
+    const aboutTab = document.querySelector('.about');
+    const startingScreen = document.querySelector('.start');
+
+   
+    aboutTab.style.opacity = "0";
+    startingScreen.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+}
+
+function buyItem1(){
+    const cost = document.getElementById("clothes1");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("clothes1Img");
+    console.log(cost.textContent);
+    console.log(totalMoney.textContent);
+    console.log(totalMoney.textContent > parseInt(cost.textContent));
+    if(totalMoney.textContent > parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem2(){
+    const cost = document.getElementById("clothes2");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("clothes2Img");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem3(){
+    const cost = document.getElementById("clothes3");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("clothes3Img");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem4(){
+    const cost = document.getElementById("toy1");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("toyImg1");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem5(){
+    const cost = document.getElementById("toy2");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("toyImg2");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem6(){
+    const cost = document.getElementById("toy3");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("toyImg3");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem7(){
+    const cost = document.getElementById("toy4");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("toyImg4");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem8(){
+    const cost = document.getElementById("toy5");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("toyImg5");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem9(){
+    const cost = document.getElementById("cat1");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("catImg1");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+
+function buyItem10(){
+    const cost = document.getElementById("cat2");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("catImg2");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem11(){
+    const cost = document.getElementById("cat3");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("catImg3");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem12(){
+    const cost = document.getElementById("trash1");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("trashImg1");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem13(){
+    const cost = document.getElementById("trash2");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("trashImg2");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem14(){
+    const cost = document.getElementById("trash3");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("trashImg3");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem15(){
+    const cost = document.getElementById("trash4");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("trashImg4");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem16(){
+    const cost = document.getElementById("trash5");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("trashImg5");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem17(){
+    const cost = document.getElementById("mystery1");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("mysteryImg1");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem18(){
+    const cost = document.getElementById("mystery2");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("mysteryImg2");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem19(){
+    const cost = document.getElementById("mystery3");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("mysteryImg3");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem20(){
+    const cost = document.getElementById("mystery4");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("mysteryImg4");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
+function buyItem21(){
+    const cost = document.getElementById("mystery5");
+    const totalMoney = document.getElementById('score');
+    const image = document.getElementById("mysteryImg5");
+    if(totalMoney.textContent >= parseInt(cost.textContent) && cost.textContent != ""){
+        money.total.amount -= cost.textContent;
+        cost.textContent = "";
+        totalMoney.textContent = `${money.total.amount}`;
+        image.style.opacity = "1";
+    }
+}
+
 
 </script>
 
@@ -65,20 +396,227 @@
             <div class="start" onclick="startScreen()">
                 <div class="start-img"></div>
             </div>
+            <div class="opentab1" onclick="tabScreen1()">
+                <div class="about">
+                    <button class="close-button" onclick="closeAboutTab()" aria-label="Close alert" type="button" data-close>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="inner-about">
+                        <h1>this is ivy, a domestic medium hair tuxedo who loves to talk.</h1>
+                        <h4>in her small world, not much happens, but when they do, she loves to talk about them.</h4><br>
+                        <img src="img/ivy-couch.JPG" alt="ivy on da couch" width="275" style="border-radius: 10px;" style="border: 10px solid #ffeed5;">
+                        <h2>start fishing to see what kind of items make up her small world!</h2>
+                        <h4>to start playing, just click the pond to fish and check ivy's inventory periodically. <br> you never know what might change!</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="opentab2" onclick="tabScreen2()">
+                <div class="hover-img">
+                    <div class="accessories-img" data-image="img/collar.JPEG">
+                        <img src="img/collar.JPEG" class="clothes-img">
+                    </div>
+                    <div class="hover-text">
+                        <div class="accessories-text">
+                            <h4 class="description1">baby pink pineapple collar</h4>
+                            <h5 class="description1">coquette.</h5>
+                            <h5 class="description1">"my first collar!"</h5>
+                            <h5 class="description1">costs 50 fish</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="inventory">
+                    <button class="close-button" onclick="closeInventoryTab()" aria-label="Close alert" type="button" data-close>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="inner-inventory">
+                        <h3 class="inventory-text">ivy's inventory</h3>
+                        <h5 class="inventory-text">hover over an item to see details:</h5>
+                        <div class="items-grid">
+                            <!-- clothes -->
+                            <div class="clothes-section">
+                                <h4 class="inventory-text">accessories</h4>
+                                <div class="item-row">
+                                    <div class="inventory-item" data-image="img/icon_clothes3" onclick="buyItem1()">
+                                        <img src="img/icon_clothes3.png" id="clothes1Img" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="clothes1" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            50
+                                          </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_clothes1" onclick="buyItem2()">
+                                        <img src="img/icon_clothes1.png" id="clothes2Img" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="clothes2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            100
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_clothes2" onclick="buyItem3()">
+                                        <img src="img/icon_clothes2.png" id="clothes3" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="clothes3" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- toys -->
+                            <div class="toys-section">
+                                <h4 class="inventory-text">toys</h4>
+                                <div class="item-row">
+                                    <div class="inventory-item" data-image="img/icon_toy1" onclick="buyItem4()">
+                                        <img src="img/icon_toy1.png" id="toyImg1" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="toy1" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_toy1" onclick="buyItem5()">
+                                        <img src="img/icon_toy2.png" id="toyImg2" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="toy2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_toy3" onclick="buyItem6()">
+                                        <img src="img/icon_toy3.png" id="toyImg3" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="toy3" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_toy4" onclick="buyItem7()">
+                                        <img src="img/icon_toy4.png" id="toyImg4" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="toy4" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_toy5" onclick="buyItem8()">
+                                        <img src="img/icon_toy5.png" id="toyImg5" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="toy5" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- furniture -->
+                            <div class="category-section">
+                                <h4 class="inventory-text">cat furniture</h4>
+                                <div class="item-row">
+                                    <div class="inventory-item" data-image="img/icon_furniture3" onclick="buyItem9()">
+                                        <img src="img/icon_furniture3.png"  id="catImg1" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="cat1" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_furniture1" onclick="buyItem10()">
+                                        <img src="img/icon_furniture1.png" id="catImg2" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="cat2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_furniture2" onclick="buyItem11()">
+                                        <img src="img/icon_furniture2.png" id="catImg3" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="cat3" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- trash -->
+                            <div class="category-section">
+                                <h4 class="inventory-text">trash</h4>
+                                <div class="item-row">
+                                    <div class="inventory-item" data-image="img/icon_trash1" onclick="buyItem12()">
+                                        <img src="img/icon_trash1.png" id="trashImg1" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="trash1" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_trash2" onclick="buyItem13()">
+                                        <img src="img/icon_trash2.png" id="trashImg2" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="trash2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_trash3" onclick="buyItem14()">
+                                        <img src="img/icon_trash3.png" id="trashImg3" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="trash3" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_trash4" onclick="buyItem15()">
+                                        <img src="img/icon_trash4.png" id="trashImg4" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="trash4" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_trash5" onclick="buyItem16()">
+                                        <img src="img/icon_trash5.png" id="trashImg5" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="trash5" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- what -->
+                            <div class="clothes-section">
+                                <h4 class="inventory-text">???</h4>
+                                <div class="item-row">
+                                    <div class="inventory-item" data-image="img/icon_what5" onclick="buyItem17()">
+                                        <img src="img/icon_what5.png" id="mysteryImg1" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="mystery1" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_what4" onclick="buyItem18()">
+                                        <img src="img/icon_what4.png" id="mysteryImg2" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="mystery2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_what3" onclick="buyItem19()">
+                                        <img src="img/icon_what3.png" id="mysteryImg3" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="mystery3" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_what2" onclick="buyItem20()">
+                                        <img src="img/icon_what2.png" id="mysteryImg4" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="mystery4" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                    <div class="inventory-item" data-image="img/icon_what1" onclick="buyItem21()">
+                                        <img src="img/icon_what1.png" id="mysteryImg5" class="inventory-icon" style="opacity: 0.5;">
+                                        <div id="mystery5" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
+                                            150
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="game-container">
                 <div class="header">
                     <div class="nav-buttons">
-                        <button>bait and sell</button>
-                        <button>catalogue</button>
-                        <button>accessories</button>
+                        <button onclick="toggleAboutTab()">about</button>
+                        <button onclick="toggleInventoryTab()">inventory</button>
                     </div>
                 </div>
                 <div class="background">
                     <div class="background-img"></div>
                     <div class="background-img2" id="animation" onclick="swapBackgroundImage()"></div>
+                    <button onclick="document.getElementById('animation').style.backgroundImage = 'url(img/webfishing_assets-pond2.png)'">
+                        Test Image Change
+                    </button>
                 </div>
                 <div class="character-preview">
                     <div class="gif"></div>
+                </div>
+                <div class="counter">
+                    <img src="img/webfishing-assets_salmon-fish-counter3.png" id="salmon">
+                    <div id="score-symbol">×</div><div id="score">0</div>
                 </div>
             </div>
             
