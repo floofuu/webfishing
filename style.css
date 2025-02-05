@@ -411,6 +411,7 @@ h5 {
 
 .hover-text {
     position: relative;
+    display: none;
     width: 20vw;
     height: 12.5vh;
     background-color: #ffeed5;
@@ -428,6 +429,10 @@ h5 {
 
 .hover-img {
     display: none;
+}
+
+.hover-img.active, .hover-text.active {
+    display: block;
 }
 
 #clothes1Img + .hover-img :hover{

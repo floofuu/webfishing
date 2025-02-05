@@ -18,9 +18,6 @@ var money = {
 }
 
 
-
-
-
 function updateScore() {
     money.total.amount += Math.floor(Math.random(50, 100)*51 + 50);
     const moneyDisplay = document.getElementById('score');
@@ -386,6 +383,32 @@ function buyItem21(){
     }
 }
 
+function updateImg(x, y, z){
+    console.log("ran");
+    
+    const cost = z;
+    const image = x;
+    const text = y;
+    console.log("text" + cost.textContent);
+    console.log(cost.textContent === "");
+    if(cost.textContent === ""){
+        console.log(cost.textContent === "");
+        image.style.display="block";
+        text.style.display="block";
+        console.log("" + image.style.display);
+        console.log("" + text.style.display);
+    }
+}
+
+function updateImg2(x, y){
+    
+    const image = x;
+    const text = y;
+    if(image.style.display === "block"){
+        image.style.display = "none";
+        text.style.display = "none";
+    }
+}
 
 </script>
 
@@ -404,23 +427,37 @@ function buyItem21(){
                     <div class="inner-about">
                         <h1>this is ivy, a domestic medium hair tuxedo who loves to talk.</h1>
                         <h4>in her small world, not much happens, but when they do, she loves to talk about them.</h4><br>
-                        <img src="img/ivy-couch.JPG" alt="ivy on da couch" width="275" style="border-radius: 10px;" style="border: 10px solid #ffeed5;">
+                        <img src="img/ivy2.JPG" alt="ivy on da couch" width="275" style="border-radius: 10px;" style="border: 10px solid #ffeed5;">
                         <h2>start fishing to see what kind of items make up her small world!</h2>
                         <h4>to start playing, just click the pond to fish and check ivy's inventory periodically. <br> you never know what might change!</h4>
                     </div>
                 </div>
             </div>
             <div class="opentab2" onclick="tabScreen2()">
-                <div class="hover-img">
-                    <div class="accessories-img" data-image="img/collar.JPEG">
+                <div class="hover-img" id="hImg1" style="display: none;">
+                    <div class="accessories-img" data-image="img/collar.jpg">
                         <img src="img/collar.JPEG" class="clothes-img">
                     </div>
-                    <div class="hover-text">
+                    <div class="hover-text" id="hTxt1" style="display: none;">
                         <div class="accessories-text">
                             <h4 class="description1">baby pink pineapple collar</h4>
                             <h5 class="description1">coquette.</h5>
                             <h5 class="description1">"my first collar!"</h5>
                             <h5 class="description1">costs 50 fish</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hover-img" id="hImg2" style="display: none;">
+                    <div class="accessories-img" data-image="img/holiday2.JPG">
+                        <img src="img/holiday2.JPG" class="clothes-img">
+                    </div>
+                    <div class="hover-text" id="hTxt2" style="display: none;">
+                        <div class="accessories-text">
+                            <h4 class="description1">first christmas sweater</h4>
+                            <h5 class="description1">forced second skin.</h5>
+                            <h5 class="description1">"i would rather be naked"</h5>
+                            <h5 class="description1">costs 100 fish</h5>
                         </div>
                     </div>
                 </div>
@@ -437,13 +474,13 @@ function buyItem21(){
                             <div class="clothes-section">
                                 <h4 class="inventory-text">accessories</h4>
                                 <div class="item-row">
-                                    <div class="inventory-item" data-image="img/icon_clothes3" onclick="buyItem1()">
+                                    <div class="inventory-item" data-image="img/icon_clothes3" onclick="buyItem1()" onmouseover="updateImg(document.getElementById('hImg1'), document.getElementById('hTxt1'), document.getElementById('clothes1'))" onmouseout="updateImg2(document.getElementById('hImg1'), document.getElementById('hTxt1'))">
                                         <img src="img/icon_clothes3.png" id="clothes1Img" class="inventory-icon" style="opacity: 0.5;">
                                         <div id="clothes1" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
                                             50
                                           </div>
                                     </div>
-                                    <div class="inventory-item" data-image="img/icon_clothes1" onclick="buyItem2()">
+                                    <div class="inventory-item" data-image="img/icon_clothes1" onclick="buyItem2()" onmouseover="updateImg(document.getElementById('hImg2'), document.getElementById('hTxt2'), document.getElementById('clothes2'))" onmouseout="updateImg2(document.getElementById('hImg2'), document.getElementById('hTxt2'))">
                                         <img src="img/icon_clothes1.png" id="clothes2Img" class="inventory-icon" style="opacity: 0.5;">
                                         <div id="clothes2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
                                             100
